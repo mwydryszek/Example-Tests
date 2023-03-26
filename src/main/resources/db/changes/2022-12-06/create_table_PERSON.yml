@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_table_PERSON
+      author: mwydryszek
+      changes:
+        - createTable:
+            tableName: PERSON
+            columns:
+              - column:
+                  name: id
+                  type: NUMBER(38,0)
+                  constraints:
+                    - primaryKey: true
+                      primaryKeyName: PERSON_ID_PK
+                      nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birth_date
+                  type: date
+                  constraints:
+                    nullable: false

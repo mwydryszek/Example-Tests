@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_sequence_address_id_seq
+      author: mwydryszek
+      changes:
+        -  createSequence:
+             sequenceName: address_id_seq
+             startValue: 1
+  - changeSet:
+      id: create_sequence_person_id_seq
+      author: mwydryszek
+      changes:
+        - createSequence:
+            sequenceName: person_id_seq
+            startValue: 1

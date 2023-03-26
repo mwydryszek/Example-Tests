@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_table_ADDRESS
+      author: mwydryszek
+      changes:
+        - createTable:
+            tableName: ADDRESS
+            columns:
+              - column:
+                  name: id
+                  type: NUMBER(38,0)
+                  constraints:
+                    - primaryKey: true
+                      primaryKeyName: ADDRESS_ID_PK
+                      nullable: false
+              - column:
+                  name: street_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: commune_code
+                  type: varchar(6)
+              - column:
+                  name: house_number
+                  type: varchar(25)
+              - column:
+                  name: flat_number
+                  type: varchar(25)
+              - column:
+                  name: city
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_default
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: person_id
+                  type: number(5)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: address_person_id_fk_constraint
+                    references: PERSON(ID)
+
+

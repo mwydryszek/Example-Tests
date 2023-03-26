@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: ./changes/2022-12-06/init_database.yml
+      relativeToChangelogFile: true
+  - include:
+      file: ./changes/2022-12-06/create_sequences.yml
+      relativeToChangelogFile: true
+  - include:
+      file: ./changes/2022-12-06/create_table_PERSON.yml
+      relativeToChangelogFile: true
+  - include:
+      file: ./changes/2022-12-06/create_table_ADDRESS.yml
+      relativeToChangelogFile: true
