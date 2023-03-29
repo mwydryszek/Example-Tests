@@ -1,9 +1,11 @@
 package com.example.demo.utils;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+@Component
 public class MessageCollector {
 
     private final List<String> messages;
@@ -20,7 +22,7 @@ public class MessageCollector {
     }
 
     public String buildMessage(){
-        return messages.stream().collect(Collectors.joining("\n"));
+        return String.join("\n", messages);
     }
 
 }

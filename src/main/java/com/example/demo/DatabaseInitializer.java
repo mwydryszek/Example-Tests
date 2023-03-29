@@ -37,7 +37,31 @@ public class DatabaseInitializer {
                 .personEntity(personEntity)
                 .build();
 
+
+        AddressEntity addressEntity1 = AddressEntity.builder()
+                .streetName("Koszalińska")
+                .city("Koszalin")
+                .communeCode("75-123")
+                .houseNumber("1")
+                .flatNumber("20")
+                .isDefault(false)
+                .personEntity(personEntity)
+                .build();
+
+
+        AddressEntity addressEntity2= AddressEntity.builder()
+                .streetName("Nowa")
+                .city("Koszalin")
+                .communeCode("75-123")
+                .houseNumber("1")
+                .flatNumber("20")
+                .isDefault(false)
+                .personEntity(personEntity)
+                .build();
+
         addressRepository.save(addressEntity);
+        addressRepository.save(addressEntity1);
+        addressRepository.save(addressEntity2);
 
 
     }

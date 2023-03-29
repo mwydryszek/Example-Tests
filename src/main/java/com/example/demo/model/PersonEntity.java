@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "PERSON")
 @SequenceGenerator(name = "generator_seq",
-        sequenceName = "customer_id_seq",
+        sequenceName = "person_id_seq",
         allocationSize = 1,
         initialValue = 1)
 public class PersonEntity extends BaseEntity {
