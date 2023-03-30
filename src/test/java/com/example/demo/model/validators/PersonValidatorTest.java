@@ -33,8 +33,8 @@ class PersonValidatorTest {
 
         //given
 
-        LocalDate localDate = LocalDate.of(2010, 3, 23);
-        Mockito.when(timeProvider.getLocalDate()).thenReturn(LocalDate.now());
+        LocalDate localDate = LocalDate.of(2000, 3, 23);
+        Mockito.when(timeProvider.getLocalDate()).thenReturn(localDate);
 
         PersonDTO person = PersonDTO.builder()
                 .firstName("Mateusz")

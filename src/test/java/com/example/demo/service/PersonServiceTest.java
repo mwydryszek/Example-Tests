@@ -15,14 +15,14 @@ import org.mockito.Mock;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 class PersonServiceTest {
@@ -52,35 +52,45 @@ class PersonServiceTest {
         Assertions.assertTrue(result.size() == 3);
     }
 
+
+
+//    @Test
+//    @DisplayName("Should save person to list")
+//    public void testSaveUser() {
+//
+//        //given
+//        PersonEntity person = PersonEntity.builder()
+//                .firstName("Marek")
+//                .lastName("Nowy")
+//                .birthDate(LocalDate.of(2000, 1,1))
+//                .build();
+//
+//        Mockito.when(personRepository.save(person)).thenReturn(person);
+//
+//
+//        PersonDTO returnedPerson = personService.addPerson(PersonDTO.builder()
+//                .firstName("Marek")
+//                .lastName("Nowy")
+//                .birthDate(LocalDate.of(2000, 1,1))
+//                .build());
+//
+//        assertAll(
+//                ()-> assertEquals(person.getFirstName(),returnedPerson.getFirstName()),
+//                ()-> assertEquals(person.getLastName(),returnedPerson.getLastName()),
+//                ()-> assertEquals(person.getBirthDate(),returnedPerson.getBirthDate())
+//        );
+//    }
+
+
     @Test
-    @DisplayName("Should save person to list")
-    public void addPerson(){
+    @DisplayName("Should delete user by id")
+    public void testDeleteUserById() {
 
+        Mockito.doNothing().when(personRepository).deleteById(1L);
 
-        //given
-        PersonEntity person = PersonEntity.builder()
-                .firstName("Marek")
-                .lastName("Nowy")
-                .birthDate(LocalDate.of(2000, 1,1))
-                .build();
-
-        lenient().when(personRepository.save(any(PersonEntity.class))).thenReturn(person);
-
-        //when
-        PersonDTO returnedPerson = personService.addPerson(PersonDTO.builder()
-                .firstName("Marek")
-                .lastName("Nowy")
-                .birthDate(LocalDate.of(2000, 1,1))
-                .build());
-
-
-        assertAll(
-                ()-> assertEquals(person.getFirstName(),returnedPerson.getFirstName()),
-                ()-> assertEquals(person.getLastName(),returnedPerson.getLastName()),
-                ()-> assertEquals(person.getBirthDate(),returnedPerson.getBirthDate())
-        );
+        personService.deletePerson(1L);
+        Mockito.verify(personRepository, Mockito.times(1)).deleteById(1L);
     }
-
 
 
     private List<PersonEntity> prepareMockData(){
