@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.dtos.PersonDTO;
+import com.example.demo.model.dtos.PersonListResponse;
 import com.example.demo.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +16,8 @@ public class PersonController {
     private final PersonService personService;
 
     @GetMapping("/all")
-    public List<PersonDTO> getAllPersons() {
-        return personService.getAllPersons();
+    public PersonListResponse getAllPersons() {
+        return new PersonListResponse(personService.getAllPersons());
     }
 
     @GetMapping

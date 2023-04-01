@@ -4,11 +4,13 @@ import com.example.demo.model.AddressEntity;
 import com.example.demo.model.PersonEntity;
 import com.example.demo.model.dtos.AddressDTO;
 import com.example.demo.model.dtos.PersonDTO;
+import liquibase.util.CollectionUtil;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +29,9 @@ public interface PersonMapper {
 
     @Named("defaultAddress")
     default AddressDTO getDefaultAddress(PersonEntity personEntity) {
+        if(CollectionUtils.isEmpty(personEntity.getAddresses())){
+            return null;
+        }
         return personEntity.getAddresses().stream()
                 .filter(AddressEntity::isDefault)
                 .map(AddressMapper.INSTANCE::mapToDTO)
@@ -36,6 +41,10 @@ public interface PersonMapper {
 
     @Named("addresses")
     default List<AddressDTO> getAddresses(PersonEntity personEntity) {
+
+        if(CollectionUtils.isEmpty(personEntity.getAddresses())){
+            return null;
+        }
         return personEntity.getAddresses().stream()
                 .filter(addressEntity -> !addressEntity.isDefault())
                 .map(AddressMapper.INSTANCE::mapToDTO)
