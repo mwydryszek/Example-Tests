@@ -4,9 +4,9 @@ import com.example.demo.model.dtos.PersonDTO;
 import com.example.demo.model.dtos.PersonListResponse;
 import com.example.demo.service.PersonService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,18 +21,24 @@ public class PersonController {
     }
 
     @GetMapping
-    public PersonDTO getPersonById(@RequestParam(name = "id", required = false) Long id) {
-        return personService.getPersonById(id);
+    public ResponseEntity<PersonDTO> getPersonById(@RequestParam(name = "id", required = false) Long id) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(personService.getPersonById(id));
     }
 
     @PostMapping
-    public PersonDTO addPerson(@RequestBody PersonDTO personDTO) {
-        return personService.addPerson(personDTO);
+    public ResponseEntity<PersonDTO> addPerson(@RequestBody PersonDTO personDTO) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(personService.addPerson(personDTO));
     }
 
     @PutMapping("/{id}")
-    public PersonDTO updatePerson(@PathVariable("id") Long id, @RequestBody PersonDTO personDTO) {
-        return personService.updatePerson(id, personDTO);
+    public ResponseEntity<PersonDTO> updatePerson(@PathVariable("id") Long id, @RequestBody PersonDTO personDTO) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(personService.updatePerson(id, personDTO));
     }
 
     @DeleteMapping("/{id}")

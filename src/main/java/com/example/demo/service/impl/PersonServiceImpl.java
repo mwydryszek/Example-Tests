@@ -30,15 +30,15 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonDTO addPerson(PersonDTO personDTO) {
-        PersonEntity customer = personRepository.save(personMapper.mapToEntity(personDTO));
-        return personMapper.mapToDTO(customer);
+        PersonEntity person = personRepository.save(personMapper.mapToEntity(personDTO));
+        return personMapper.mapToDTO(person);
     }
 
     @Override
     public PersonDTO updatePerson(Long id, PersonDTO personDTO) {
         personDTO.setId(id);
-        PersonEntity customer = personRepository.save(personMapper.mapToEntity(personDTO));
-        return personMapper.mapToDTO(customer);
+        PersonEntity person = personRepository.save(personMapper.mapToEntity(personDTO));
+        return personMapper.mapToDTO(person);
     }
 
 

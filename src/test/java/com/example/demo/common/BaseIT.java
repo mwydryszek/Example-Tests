@@ -21,8 +21,6 @@ import java.nio.charset.StandardCharsets;
 @SpringBootTest(classes = DemoApplication.class)
 public class BaseIT {
 
-
-
     @Autowired
     protected MockMvc mockMvc;
 
@@ -37,5 +35,6 @@ public class BaseIT {
         String contentAsString = resultActions.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
         return objectMapper.readValue(contentAsString, clazz);
     }
+
 
 }

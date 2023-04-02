@@ -1,14 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.dtos.AddressDTO;
+import com.example.demo.model.dtos.AddressListResponse;
 import com.example.demo.service.AddressService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,23 +16,29 @@ public class AddressController {
     private final AddressService addressService;
 
     @GetMapping("/all")
-    public List<AddressDTO> getAllAddresses() {
-        return addressService.getAllAddresses();
+    public AddressListResponse getAllAddresses() {
+        return new AddressListResponse(addressService.getAllAddresses());
     }
 
     @GetMapping
-    public AddressDTO getAddressById(@RequestParam(name = "id", required = false) Long id) {
-        return addressService.getAddressById(id);
+    public ResponseEntity<AddressDTO> getAddressById(@RequestParam(name = "id", required = false) Long id) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(addressService.getAddressById(id));
     }
 
     @PostMapping
-    public AddressDTO addAddress(@RequestBody AddressDTO addressDTO) {
-        return addressService.addAddress(addressDTO);
+    public ResponseEntity<AddressDTO> addAddress(@RequestBody AddressDTO addressDTO) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(addressService.addAddress(addressDTO));
     }
 
     @PutMapping("/{id}")
-    public AddressDTO updateAddress(@PathVariable("id") Long id, @RequestBody AddressDTO addressDTO) {
-        return addressService.updateAddress(id, addressDTO);
+    public ResponseEntity<AddressDTO> updateAddress(@PathVariable("id") Long id, @RequestBody AddressDTO addressDTO) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(addressService.updateAddress(id, addressDTO));
     }
 
     @DeleteMapping("/{id}")

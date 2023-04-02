@@ -15,6 +15,8 @@ import org.springframework.util.CollectionUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.function.Predicate.not;
+
 @Mapper(uses = {AddressMapper.class}, componentModel = "spring")
 public interface PersonMapper {
 
@@ -46,7 +48,7 @@ public interface PersonMapper {
             return null;
         }
         return personEntity.getAddresses().stream()
-                .filter(addressEntity -> !addressEntity.isDefault())
+                .filter(not(AddressEntity::isDefault))
                 .map(AddressMapper.INSTANCE::mapToDTO)
                 .toList();
     }
