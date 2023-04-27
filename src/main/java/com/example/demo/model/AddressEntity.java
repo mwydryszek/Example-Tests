@@ -4,6 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+import org.hibernate.envers.RelationTargetAuditMode;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
 
@@ -17,7 +24,14 @@ import javax.persistence.*;
         sequenceName = "address_id_seq",
         allocationSize = 1,
         initialValue = 1)
+@Audited
+@EntityListeners(AuditingEntityListener.class)
 public class AddressEntity extends BaseEntity {
+
+    @CreatedBy
+    private String modified;
+    @LastModifiedBy
+    private String created;
 
     @Column(length = 100, nullable = false)
     private String streetName;
@@ -37,6 +51,7 @@ public class AddressEntity extends BaseEntity {
     @Column(nullable = false)
     private boolean isDefault;
 
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     @ManyToOne
     @JoinColumn(name="person_id", referencedColumnName = "id")
     private PersonEntity personEntity;
