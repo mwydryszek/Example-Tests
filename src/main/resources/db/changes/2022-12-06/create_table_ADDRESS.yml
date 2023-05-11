@@ -44,5 +44,12 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: address_person_id_fk_constraint
                     references: PERSON(ID)
+  - changeSet:
+      id: create_sequence_address_id_seq
+      author: mwydryszek
+      changes:
+        -  createSequence:
+             sequenceName: address_id_seq
+             startValue: 1
 
 

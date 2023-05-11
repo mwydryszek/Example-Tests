@@ -28,3 +28,10 @@ databaseChangeLog:
                   type: date
                   constraints:
                     nullable: false
+  - changeSet:
+      id: create_sequence_person_id_seq
+      author: mwydryszek
+      changes:
+        - createSequence:
+            sequenceName: person_id_seq
+            startValue: 1

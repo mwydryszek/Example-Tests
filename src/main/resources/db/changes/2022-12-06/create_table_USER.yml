@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_table_USER
+      author: mwydryszek
+      changes:
+        - createTable:
+            tableName: USER
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: USER_PK
+                  name: ID
+                  type: NUMBER(19)
+              - column:
+                  name: USERNAME
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PASSWORD
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: EMAIL
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ACTIVE
+                  type: NUMBER(1)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create_user_seq
+      author: mwydryszek
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: user_seq
+            startValue: 1
+            minValue: 1
+            maxValue: 9223372036854775807
