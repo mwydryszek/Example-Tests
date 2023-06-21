@@ -19,6 +19,7 @@ import java.util.List;
         allocationSize = 1,
         initialValue = 1)
 public class PersonEntity extends BaseEntity {
+    
 
     @Column(length = 50, nullable = false)
     private String firstName;

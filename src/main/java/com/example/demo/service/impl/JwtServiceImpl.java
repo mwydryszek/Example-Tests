@@ -119,5 +119,16 @@ public class JwtServiceImpl implements JwtService {
                 .compact();
     }
 
+    @Override
+    public String getUsernameFromAccessToken(String token){
+        return getUsernameFromToken(token, jwtProperties.getAccessTokenSecret());
+    }
+
+    private String getUsernameFromToken(String token, String secret){
+        Jws<Claims> tokenClaims = Jwts.parser().
+                setSigningKey(secret).
+                parseClaimsJws(token);
+        return tokenClaims.getBody().getSubject();
+    }
 
 }

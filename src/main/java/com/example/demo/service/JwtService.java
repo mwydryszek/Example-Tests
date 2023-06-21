@@ -9,4 +9,6 @@ public interface JwtService {
     AuthenticationDTO auth(UsernamePasswordDTO usernamePasswordDTO);
 
     void logout(LogoutDTO logoutDTO);
+
+    String getUsernameFromAccessToken(String token);
 }
